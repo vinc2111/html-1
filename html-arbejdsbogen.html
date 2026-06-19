@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Arbejdsbogen</title>
+<style>
+  body{
+    font-family:"Times New Roman",Times,serif;
+    max-width:46em;
+    margin:1.5em auto;
+    padding:0 1.2em;
+    color:#000;
+    background:#fff;
+    line-height:1.55;
+  }
+  a{color:#0000ee;}
+  a:visited{color:#551a8b;}
+  code{font-family:"Courier New",Courier,monospace;}
+  table.play{width:100%;border-collapse:collapse;margin:.6em 0;}
+  table.play td{width:50%;vertical-align:top;padding:0 6px 0 0;}
+  textarea.editor{
+    width:100%;height:220px;
+    font-family:"Courier New",Courier,monospace;font-size:14px;
+    padding:4px;
+  }
+  iframe.preview{width:100%;height:220px;}
+  hr{margin:1.8em 0;}
+  h3{margin-bottom:.2em;}
+  h4{margin-bottom:.2em;}
+  #toc ul{margin:.2em 0 1em;}
+  @media (max-width:640px){
+    table.play td{display:block;width:auto;padding:0;}
+    iframe.preview{margin-top:6px;}
+  }
+</style>
+</head>
+<body>
+
+<h1 id="top">HTML Arbejdsbogen</h1>
+<p>Lær at bygge hjemmesider: du skriver HTML i venstre boks, og siden vises i højre boks med det samme.</p>
+<p>Du kan ikke ødelægge noget. Sidder du fast, så tryk på <b>Nulstil</b>, så starter boksen forfra.</p>
+<p><b>Bemærk:</b> selve koden (det, der hedder <i>tags</i>) er altid på engelsk &ndash; sådan virker HTML over hele verden. Men forklaringerne her er på dansk. For eksempel betyder <code>p</code> "paragraph", altså afsnit.</p>
+<p>Kurset er delt op i syv dele. Du behøver ikke lave det hele på én gang &ndash; du kan altid hoppe til en lektion via indholdsfortegnelsen.</p>
+
+<h2 id="indhold">Indhold</h2>
+<div id="toc"></div>
+
+<hr>
+
+<div id="lessons"></div>
+
+<p><a href="#top">Tilbage til toppen</a></p>
+
+<script>
+/* ---------------- Indhold ---------------- */
+const lessons = [
+
+  /* ===== DEL 1 ===== */
+  {
+    part:"Del 1: Det grundlæggende", nav:"Hvad er HTML?", title:"Hvad er HTML?",
+    body:`<p>Alle hjemmesider, du nogensinde har set &ndash; spil, videoer, dine yndlingssider &ndash; er bygget med HTML. Tænk på HTML som skelettet bag en side: du skriver små instruktioner, der hedder <b>tags</b>, og browseren laver dem om til noget, du kan se.</p>
+    <p>Et tag er et ord inde i vinkelparenteser, sådan her: <code>&lt;p&gt;</code>. De fleste tags kommer i par &ndash; ét til at åbne <code>&lt;p&gt;</code> og ét til at lukke <code>&lt;/p&gt;</code> &ndash; med dine ord i midten.</p>
+    <p>Prøv det herunder: lav teksten om, og se højre side ændre sig, så snart du skriver.</p>`,
+    tags:["&lt;h1&gt;","&lt;p&gt;"],
+    code:`<h1>Hej! Jeg hedder Mia.</h1>
+<p>Jeg er ved at lære at bygge hjemmesider.</p>
+<p>Lav teksten om og se denne side ændre sig!</p>`,
+    challenge:["Skift navnet ud med dit eget.","Tilføj et tredje <code>&lt;p&gt;</code> med din yndlingshobby."]
+  },
+  {
+    part:"Del 1: Det grundlæggende", nav:"Overskrifter", title:"Overskrifter",
+    body:`<p>Overskrifter er de store titler på en side. <code>&lt;h1&gt;</code> er den største, så <code>&lt;h2&gt;</code>, og videre ned til <code>&lt;h6&gt;</code>, som er den mindste &ndash; ligesom kapiteltitler og underoverskrifter i en matematikbog.</p>
+    <p>Reglen er: der er kun én <code>&lt;h1&gt;</code> på en side (sidens hovedtitel), og så bruger du <code>&lt;h2&gt;</code> og <code>&lt;h3&gt;</code> til afsnit under den.</p>`,
+    tags:["&lt;h1&gt;","&lt;h2&gt;","&lt;h3&gt;"],
+    code:`<h1>Matematik</h1>
+<h2>Tal</h2>
+<h3>Primtal</h3>
+<h2>Geometri</h2>
+<h3>Trekanter</h3>`,
+    challenge:["Lav din egen oversigt med <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code> og <code>&lt;h3&gt;</code> om et emne, du kan lide.","Ekstra: prøv også <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code> og <code>&lt;h6&gt;</code> og se, hvor små de bliver."]
+  },
+  {
+    part:"Del 1: Det grundlæggende", nav:"Afsnit og tekst", title:"Afsnit og tekst",
+    body:`<p>Et <code>&lt;p&gt;</code> (paragraph = afsnit) holder almindelige sætninger. Et sjovt trick: browseren er ligeglad med, hvor mange mellemrum eller linjeskift du laver i koden &ndash; den samler det hele til ét pænt afsnit.</p>
+    <p>Vil du have et nyt afsnit, laver du bare et nyt <code>&lt;p&gt;</code>.</p>`,
+    tags:["&lt;p&gt;"],
+    code:`<p>Et afsnit kan være langt eller kort.</p>
+<p>Selvom jeg trykker
+Enter
+mange gange her,
+bliver det til ét afsnit.</p>
+<p>Det her er et helt nyt afsnit.</p>`,
+    challenge:["Skriv tre afsnit om din dag.","Ekstra: prøv at skrive det hele i ét <code>&lt;p&gt;</code> med mange linjeskift &ndash; hvad sker der med mellemrummene?"]
+  },
+  {
+    part:"Del 1: Det grundlæggende", nav:"Fed og kursiv", title:"Fed, kursiv og fremhævning",
+    body:`<p>Du kan fremhæve ord. <code>&lt;b&gt;</code> gør tekst fed, og <code>&lt;i&gt;</code> gør den kursiv (skråt skrevet). <code>&lt;strong&gt;</code> betyder "vigtigt" (også fed), og <code>&lt;em&gt;</code> betyder "betoning" (også kursiv).</p>
+    <p><code>&lt;mark&gt;</code> fremhæver med gul overstregning &ndash; perfekt til et svar, du vil have til at springe i øjnene.</p>`,
+    tags:["&lt;b&gt;","&lt;i&gt;","&lt;strong&gt;","&lt;mark&gt;"],
+    code:`<p>Dette er <b>fed</b> og dette er <i>kursiv</i>.</p>
+<p><strong>Vigtigt:</strong> husk altid at lukke dine tags.</p>
+<p>Facit til opgaven er <mark>42</mark>.</p>`,
+    challenge:["Skriv en sætning, hvor det vigtigste ord er fedt.","Ekstra: fremhæv et tal med <code>&lt;mark&gt;</code>."]
+  },
+  {
+    part:"Del 1: Det grundlæggende", nav:"Linjeskift og streger", title:"Linjeskift og streger",
+    body:`<p><code>&lt;br&gt;</code> laver et linjeskift midt inde i et afsnit. Det har ikke noget luk-tag &ndash; det står helt alene.</p>
+    <p><code>&lt;hr&gt;</code> tegner en vandret streg tværs over siden. Den er god til at dele siden op i sektioner.</p>`,
+    tags:["&lt;br&gt;","&lt;hr&gt;"],
+    code:`<p>Rosen er rød<br>
+violen er blå<br>
+matematik er sjovt<br>
+det synes du også.</p>
+<hr>
+<p>Her starter en ny sektion under stregen.</p>`,
+    challenge:["Skriv din adresse, så hver linje får sit eget <code>&lt;br&gt;</code>.","Ekstra: del siden i to dele med en <code>&lt;hr&gt;</code>."]
+  },
+  {
+    part:"Del 1: Det grundlæggende", nav:"Kommentarer", title:"Kommentarer (noter i koden)",
+    body:`<p>Nogle gange vil du skrive en lille note til dig selv inde i koden &ndash; en note, som ikke skal vises på siden. Det hedder en <b>kommentar</b>. Den starter med <code>&lt;!--</code> og slutter med <code>--&gt;</code>, og alt derimellem springer browseren over.</p>
+    <p>Kig på højre side: kun det rigtige indhold vises, ikke kommentarerne.</p>`,
+    tags:["&lt;!-- ... --&gt;"],
+    code:`<!-- Det her er en note. Den vises ikke. -->
+<h2>Min side</h2>
+<p>Kun denne tekst kan man se.</p>
+<!-- Husk: tilføj et billede her senere -->`,
+    challenge:["Skriv en kommentar, der forklarer, hvad din side handler om.","Tjek, at kommentaren IKKE vises i forhåndsvisningen til højre."]
+  },
+  {
+    part:"Del 1: Det grundlæggende", nav:"Specialtegn", title:"Specialtegn og matematik-symboler",
+    body:`<p>Nogle tegn er svære at skrive direkte, fordi HTML selv bruger dem (som <code>&lt;</code> og <code>&gt;</code>). Derfor skriver vi dem med en kode, der starter med <code>&amp;</code> og slutter med <code>;</code>.</p>
+    <p>Mange matematik-symboler har også en kode: <code>&amp;times;</code> giver ×, <code>&amp;divide;</code> giver ÷, og <code>&amp;pi;</code> giver π. Skriv koden i venstre boks, og se det rigtige symbol dukke op til højre.</p>`,
+    tags:["&amp;lt;","&amp;gt;","&amp;times;","&amp;divide;","&amp;pi;"],
+    code:`<p>Mindre end: &lt; &nbsp; Større end: &gt;</p>
+<p>Gange: &times; &nbsp; Division: &divide;</p>
+<p>Cirka lig med: &asymp; &nbsp; Pi: &pi;</p>
+<p>3 &times; 4 = 12 &nbsp; og &nbsp; 10 &divide; 2 = 5</p>`,
+    challenge:["Skriv \"5 &lt; 8\" og \"8 &gt; 5\" rigtigt på siden (brug <code>&amp;lt;</code> og <code>&amp;gt;</code>).","Ekstra: skriv dit eget regnestykke med <code>&amp;times;</code> eller <code>&amp;divide;</code>."]
+  },
+
+  /* ===== DEL 2 ===== */
+  {
+    part:"Del 2: Struktur og lister", nav:"Lister", title:"Lister",
+    body:`<p>Lister holder styr på tingene. En <b>punktliste</b> bruger <code>&lt;ul&gt;</code> og viser punkttegn &ndash; god, når rækkefølgen er ligegyldig. En <b>nummereret liste</b> bruger <code>&lt;ol&gt;</code> og nummererer sig selv automatisk &ndash; god til trin eller en talrække.</p>
+    <p>Hvert punkt skal stå i sit eget <code>&lt;li&gt;</code>-tag (list item = listepunkt).</p>`,
+    tags:["&lt;ul&gt;","&lt;ol&gt;","&lt;li&gt;"],
+    code:`<h2>De fem første lige tal</h2>
+<ol>
+  <li>2</li>
+  <li>4</li>
+  <li>6</li>
+  <li>8</li>
+  <li>10</li>
+</ol>
+
+<h2>Former jeg kan lide</h2>
+<ul>
+  <li>Trekant</li>
+  <li>Sekskant</li>
+</ul>`,
+    challenge:["Tilføj de næste to lige tal (12 og 14) til den nummererede liste.","Læg mærke til, at tallene tæller sig selv om automatisk."]
+  },
+  {
+    part:"Del 2: Struktur og lister", nav:"Lister i lister", title:"Lister inde i lister",
+    body:`<p>Du kan putte en liste <b>inde i</b> et listepunkt for at lave underpunkter. Det er smart til at gruppere ting under en overskrift.</p>
+    <p>Pas på at lukke de indre lister, før du lukker de ydre.</p>`,
+    tags:["&lt;ul&gt;","&lt;li&gt;"],
+    code:`<h2>Tal</h2>
+<ul>
+  <li>Lige tal
+    <ul>
+      <li>2</li>
+      <li>4</li>
+    </ul>
+  </li>
+  <li>Ulige tal
+    <ul>
+      <li>1</li>
+      <li>3</li>
+    </ul>
+  </li>
+</ul>`,
+    challenge:["Lav en liste med to slags former (fx \"med hjørner\" og \"runde\") og giv hver et par eksempler som underpunkter."]
+  },
+  {
+    part:"Del 2: Struktur og lister", nav:"Ordliste", title:"Beskrivelseslister (en ordliste)",
+    body:`<p>En <code>&lt;dl&gt;</code> (description list) er perfekt til en ordbog eller ordliste. <code>&lt;dt&gt;</code> er ordet (term), og <code>&lt;dd&gt;</code> er forklaringen. Det er som skabt til matematik-begreber.</p>`,
+    tags:["&lt;dl&gt;","&lt;dt&gt;","&lt;dd&gt;"],
+    code:`<dl>
+  <dt>Primtal</dt>
+  <dd>Et tal, der kun kan deles med 1 og sig selv.</dd>
+
+  <dt>Lige tal</dt>
+  <dd>Et tal, der kan deles med 2.</dd>
+</dl>`,
+    challenge:["Lav din egen miniordbog med tre matematik-ord og deres forklaringer."]
+  },
+
+  /* ===== DEL 3 ===== */
+  {
+    part:"Del 3: Links og billeder", nav:"Links", title:"Links",
+    body:`<p>Et link bruger <code>&lt;a&gt;</code> med en <code>href</code>-attribut, der peger på en anden side. En <b>attribut</b> er ekstra information inde i tagget. Det, du skriver mellem <code>&lt;a&gt;</code> og <code>&lt;/a&gt;</code>, bliver til den tekst, man kan klikke på.</p>`,
+    tags:["&lt;a&gt;","href"],
+    code:`<h2>Mine yndlingssider</h2>
+<p>
+  Lær mere matematik på
+  <a href="https://www.matematikfessor.dk">Matematikfessor</a>.
+</p>`,
+    challenge:["Skift link-teksten ud med dine egne ord.","Ekstra: tilføj endnu et link til en side, du kan lide."]
+  },
+  {
+    part:"Del 3: Links og billeder", nav:"Flere slags links", title:"Links til nye faner og til samme side",
+    body:`<p><code>target="_blank"</code> får linket til at åbne i en ny fane. Du kan også lave et link, der hopper til en bestemt overskrift på <b>samme</b> side: giv overskriften et <code>id</code>, og lav et link til <code>#</code> efterfulgt af id'et.</p>`,
+    tags:["target","id","#anker"],
+    code:`<h2 id="start">Toppen</h2>
+<p><a href="#slut">Hop til bunden</a></p>
+<p><a href="https://www.dr.dk" target="_blank">Åbn i ny fane</a></p>
+
+<p>... forestil dig en masse tekst her ...</p>
+<p>... og endnu mere ...</p>
+
+<h2 id="slut">Bunden</h2>
+<p><a href="#start">Tilbage til toppen</a></p>`,
+    challenge:["Lav to overskrifter med hvert sit <code>id</code> og et link mellem dem.","Ekstra: lav et link, der åbner i en ny fane."]
+  },
+  {
+    part:"Del 3: Links og billeder", nav:"Billeder", title:"Billeder",
+    body:`<p>Et <code>&lt;img&gt;</code>-tag sætter et billede på siden. Det har ikke noget luk-tag. <code>src</code> fortæller, hvor billedet kommer fra, <code>width</code> bestemmer størrelsen, og <code>alt</code> er en tekst, der vises (eller læses højt), hvis billedet ikke kan ses.</p>`,
+    tags:["&lt;img&gt;","src","width","alt"],
+    code:`<h2>En form jeg har tegnet</h2>
+<img width="120" alt="en gul stjerne"
+  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,5 61,38 96,38 68,59 79,92 50,72 21,92 32,59 4,38 39,38' fill='%23cc9900'/%3E%3C/svg%3E">`,
+    challenge:["Skift <code>width</code> til 200 og se stjernen blive større.","Ekstra: skriv en bedre <code>alt</code>-tekst, der beskriver billedet."]
+  },
+  {
+    part:"Del 3: Links og billeder", nav:"Figur med billedtekst", title:"Figur med billedtekst",
+    body:`<p><code>&lt;figure&gt;</code> samler et billede og dets tekst, og <code>&lt;figcaption&gt;</code> er teksten, der står under. Det er pænt til diagrammer og tegninger.</p>`,
+    tags:["&lt;figure&gt;","&lt;figcaption&gt;"],
+    code:`<figure>
+  <img width="100" alt="trekant"
+   src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 90,90 10,90' fill='%233366cc'/%3E%3C/svg%3E">
+  <figcaption>Figur 1: en trekant.</figcaption>
+</figure>`,
+    challenge:["Skift billedteksten ud med din egen.","Ekstra: lav en figurtekst, der forklarer, hvad formen hedder."]
+  },
+
+  /* ===== DEL 4 ===== */
+  {
+    part:"Del 4: Tabeller", nav:"Tabeller", title:"Tabeller &ndash; grundlaget",
+    body:`<p>En tabel er et gitter af rækker og kolonner &ndash; præcis som de gangetabeller, du bruger i matematik. <code>&lt;table&gt;</code> omslutter det hele. Hver række er et <code>&lt;tr&gt;</code> (table row). <code>&lt;th&gt;</code> laver en fed overskriftscelle, og <code>&lt;td&gt;</code> laver en almindelig datacelle.</p>
+    <p><code>border="1"</code> tegner stregerne, så du kan se gitteret.</p>`,
+    tags:["&lt;table&gt;","&lt;tr&gt;","&lt;th&gt;","&lt;td&gt;"],
+    code:`<h2>3-tabellen</h2>
+<table border="1">
+  <tr>
+    <th>x</th><th>3</th>
+  </tr>
+  <tr>
+    <td>1</td><td>3</td>
+  </tr>
+  <tr>
+    <td>2</td><td>6</td>
+  </tr>
+  <tr>
+    <td>3</td><td>9</td>
+  </tr>
+</table>`,
+    challenge:["Tilføj rækker for 4 × 3 og 5 × 3.","Ekstra: lav den om til 4-tabellen &ndash; skift overskriften og alle svarene."]
+  },
+  {
+    part:"Del 4: Tabeller", nav:"Større tabeller", title:"Titler og brede celler",
+    body:`<p><code>&lt;caption&gt;</code> giver tabellen en titel øverst. Du kan også lave en rigtig gangetabel med tal både langs toppen og ned ad siden.</p>`,
+    tags:["&lt;caption&gt;","&lt;th&gt;"],
+    code:`<table border="1">
+  <caption>Lille gangetabel</caption>
+  <tr>
+    <th>×</th><th>1</th><th>2</th><th>3</th>
+  </tr>
+  <tr>
+    <th>1</th><td>1</td><td>2</td><td>3</td>
+  </tr>
+  <tr>
+    <th>2</th><td>2</td><td>4</td><td>6</td>
+  </tr>
+  <tr>
+    <th>3</th><td>3</td><td>6</td><td>9</td>
+  </tr>
+</table>`,
+    challenge:["Udvid tabellen, så den går op til 4 (tilføj en kolonne og en række).","Ekstra: skift teksten i <code>&lt;caption&gt;</code> til din egen titel."]
+  },
+  {
+    part:"Del 4: Tabeller", nav:"En datatabel", title:"En lille datatabel",
+    body:`<p>Tabeller er gode til at vise data pænt. Her er en tabel med tal og deres kvadrat (tallet ganget med sig selv).</p>`,
+    tags:["&lt;table&gt;","&lt;caption&gt;"],
+    code:`<table border="1">
+  <caption>Tal og deres kvadrat</caption>
+  <tr><th>n</th><th>n × n</th></tr>
+  <tr><td>1</td><td>1</td></tr>
+  <tr><td>2</td><td>4</td></tr>
+  <tr><td>3</td><td>9</td></tr>
+  <tr><td>4</td><td>16</td></tr>
+</table>`,
+    challenge:["Tilføj rækker for 5 og 6 (husk 25 og 36).","Ekstra: tilføj en tredje kolonne med n + n."]
+  },
+
+  /* ===== DEL 5 ===== */
+  {
+    part:"Del 5: Tegning med SVG", nav:"SVG-former", title:"Tegn former med SVG",
+    body:`<p>Nu kommer det sjove. <code>&lt;svg&gt;</code> lader dig tegne med matematik. Tegnefladen er et gitter: <code>x</code> går på tværs, <code>y</code> går nedad, målt i pixels.</p>
+    <p>En <code>&lt;circle&gt;</code> skal bruge et centrum (<code>cx</code>, <code>cy</code>) og en radius (<code>r</code>). Et <code>&lt;rect&gt;</code> skal bruge et hjørne (<code>x</code>, <code>y</code>) plus <code>width</code> og <code>height</code>.</p>`,
+    tags:["&lt;svg&gt;","&lt;circle&gt;","&lt;rect&gt;","&lt;line&gt;"],
+    code:`<svg width="240" height="180">
+  <rect x="20" y="20" width="80" height="80" fill="navy"/>
+  <circle cx="170" cy="60" r="40" fill="crimson"/>
+  <line x1="20" y1="150" x2="220" y2="150"
+        stroke="green" stroke-width="6"/>
+</svg>`,
+    challenge:["Lav cirklens radius <code>r</code> om til 20 og så 60. Hvad sker der?","Flyt firkanten ved at ændre dens <code>x</code> og <code>y</code>.","Ekstra: tilføj endnu en cirkel."]
+  },
+  {
+    part:"Del 5: Tegning med SVG", nav:"Flere former", title:"Ovaler og mangekanter",
+    body:`<p><code>&lt;ellipse&gt;</code> er en oval, med en radius på langs (<code>rx</code>) og en på højkant (<code>ry</code>). <code>&lt;polygon&gt;</code> tegner en mangekant ud fra en liste af punkter &ndash; perfekt til trekanter og femkanter. <code>&lt;polyline&gt;</code> er en knækket streg.</p>`,
+    tags:["&lt;ellipse&gt;","&lt;polygon&gt;","&lt;polyline&gt;"],
+    code:`<svg width="280" height="160">
+  <ellipse cx="60" cy="80" rx="45" ry="25" fill="teal"/>
+  <polygon points="150,20 190,90 110,90" fill="orange"/>
+  <polyline points="210,30 250,60 210,90 250,120"
+    fill="none" stroke="purple" stroke-width="4"/>
+</svg>`,
+    challenge:["Gør trekanten større ved at ændre dens punkter.","Ekstra: lav en firkant eller femkant med <code>&lt;polygon&gt;</code> (4 eller 5 punkter)."]
+  },
+  {
+    part:"Del 5: Tegning med SVG", nav:"Søjlediagram", title:"Lav et søjlediagram",
+    body:`<p>Med flere <code>&lt;rect&gt;</code> kan du lave et søjlediagram, hvor hver søjles højde er et tal. Sådan laves rigtige grafer på nettet faktisk!</p>
+    <p>Husk: <code>y</code> måles fra toppen. Så jo <b>mindre</b> <code>y</code> og jo <b>større</b> <code>height</code>, jo højere bliver søjlen.</p>`,
+    tags:["&lt;rect&gt;","&lt;text&gt;"],
+    code:`<svg width="240" height="160">
+  <rect x="20"  y="60"  width="40" height="80"  fill="steelblue"/>
+  <rect x="80"  y="20"  width="40" height="120" fill="steelblue"/>
+  <rect x="140" y="100" width="40" height="40"  fill="steelblue"/>
+  <text x="32"  y="155">A</text>
+  <text x="92"  y="155">B</text>
+  <text x="152" y="155">C</text>
+</svg>`,
+    challenge:["Gør søjle C højere (mindre <code>y</code>, større <code>height</code>).","Ekstra: tilføj en fjerde søjle D."]
+  },
+  {
+    part:"Del 5: Tegning med SVG", nav:"Koordinatsystem", title:"Tegn et koordinatsystem",
+    body:`<p>Du kan tegne to akser med <code>&lt;line&gt;</code> og sætte et punkt med en lille <code>&lt;circle&gt;</code>. Det er ligesom at plotte et punkt i matematik.</p>`,
+    tags:["&lt;line&gt;","&lt;circle&gt;","&lt;text&gt;"],
+    code:`<svg width="200" height="200">
+  <line x1="20" y1="180" x2="180" y2="180" stroke="black"/>
+  <line x1="20" y1="180" x2="20"  y2="20"  stroke="black"/>
+  <circle cx="100" cy="100" r="5" fill="red"/>
+  <text x="108" y="104">mit punkt</text>
+</svg>`,
+    challenge:["Flyt det røde punkt ved at ændre <code>cx</code> og <code>cy</code>.","Ekstra: tilføj endnu et punkt et andet sted."]
+  },
+
+  /* ===== DEL 6 ===== */
+  {
+    part:"Del 6: Stil og farve", nav:"style-attributten", title:"Farve med style-attributten",
+    body:`<p>Indtil nu har dine sider set ret enkle ud. <b>CSS</b> er måden, vi tilføjer farve og stil på. Den hurtigste måde er en <code>style</code>-attribut direkte på et tag.</p>
+    <p>Inde i den skriver du par af <code>egenskab: værdi;</code>. Prøv <code>color</code> (tekstfarve), <code>background</code> (baggrund) og <code>font-size</code> (skriftstørrelse).</p>`,
+    tags:["style=\"...\"","color","background","font-size"],
+    code:`<h1 style="color: navy;">Min matematikside</h1>
+
+<p style="background: yellow; padding: 8px;">
+  Denne sætning har en gul baggrund!
+</p>
+
+<p style="color: tomato; font-size: 22px;">
+  Stor tomatfarvet tekst.
+</p>`,
+    challenge:["Skift overskriftens farve til din yndlingsfarve.","Gør det sidste afsnit endnu større (prøv 30px).","Ekstra: giv et afsnit en anden baggrundsfarve."]
+  },
+  {
+    part:"Del 6: Stil og farve", nav:"style-blokken", title:"Style mange elementer på én gang",
+    body:`<p>Det er besværligt at skrive <code>style</code> på hvert eneste tag. I stedet kan du samle reglerne i en <code>&lt;style&gt;</code>-blok. Du skriver navnet på det tag, du vil ændre, og reglerne mellem krøllede parenteser <code>{ }</code>. Så gælder de for <b>alle</b> tags af den type.</p>`,
+    tags:["&lt;style&gt;","p { }","h1 { }"],
+    code:`<style>
+  h1 { color: navy; }
+  p { color: dimgray; font-size: 18px; }
+</style>
+
+<h1>Min side</h1>
+<p>Alle afsnit bliver grå på én gang.</p>
+<p>Smart, ikke?</p>`,
+    challenge:["Gør alle <code>&lt;p&gt;</code> til en farve, du kan lide.","Ekstra: tilføj en regel for <code>&lt;h2&gt;</code> og lav en overskrift med den."]
+  },
+  {
+    part:"Del 6: Stil og farve", nav:"Rammer og bokse", title:"Rammer, luft og centrering",
+    body:`<p>Et <code>&lt;div&gt;</code> er en usynlig kasse, du kan samle ting i. Med style kan du give den en <code>border</code> (ramme), <code>padding</code> (luft indeni), <code>text-align: center</code> (centreret tekst) og en <code>background</code>.</p>`,
+    tags:["&lt;div&gt;","border","padding","text-align"],
+    code:`<div style="border: 2px solid navy; padding: 12px;
+            text-align: center; background: lightyellow;">
+  <h2>En boks</h2>
+  <p>Tekst inde i en pæn ramme.</p>
+</div>`,
+    challenge:["Skift rammens farve og gør den tykkere (fx 4px).","Ekstra: gør <code>padding</code> større og se kassen vokse."]
+  },
+  {
+    part:"Del 6: Stil og farve", nav:"Klasser", title:"Klasser &ndash; style kun nogle elementer",
+    body:`<p>Hvad nu hvis du kun vil style <b>nogle</b> af dine afsnit? Du giver dem en <code>class</code> (et navn, du selv finder på). I <code>&lt;style&gt;</code>-blokken skriver du et punktum foran navnet, og så rammer reglen kun dem, der har den klasse.</p>`,
+    tags:["class","\.navn { }"],
+    code:`<style>
+  .vigtig { color: crimson; font-weight: bold; }
+</style>
+
+<p class="vigtig">Dette er vigtigt!</p>
+<p>Dette er helt almindeligt.</p>
+<p class="vigtig">Også vigtigt.</p>`,
+    challenge:["Lav en klasse, der hedder <code>.stor</code>, med en stor <code>font-size</code>, og brug den på et afsnit.","Ekstra: giv et element to klasser på én gang (skriv begge navne med mellemrum imellem)."]
+  },
+
+  /* ===== DEL 7 ===== */
+  {
+    part:"Del 7: Sæt det hele sammen", nav:"Sidens skelet", title:"En hel HTML-fil",
+    body:`<p>Indtil nu har du kun skrevet det indhold, der hører hjemme i siden &ndash; browseren har klaret resten. En rigtig HTML-fil har nemlig en fast ramme: <code>&lt;!DOCTYPE html&gt;</code> siger "det her er HTML". <code>&lt;html&gt;</code> omslutter alt. <code>&lt;head&gt;</code> indeholder oplysninger (som <code>&lt;title&gt;</code>, der står oppe i browserens fane), og <code>&lt;body&gt;</code> indeholder alt det, man ser.</p>`,
+    tags:["&lt;!DOCTYPE&gt;","&lt;html&gt;","&lt;head&gt;","&lt;title&gt;","&lt;body&gt;"],
+    code:`<!DOCTYPE html>
+<html>
+  <head>
+    <title>Min første side</title>
+  </head>
+  <body>
+    <h1>Hej verden!</h1>
+    <p>Det her er en hel HTML-fil.</p>
+  </body>
+</html>`,
+    challenge:["Skift teksten i <code>&lt;h1&gt;</code> og <code>&lt;p&gt;</code>.","Ekstra: skift teksten i <code>&lt;title&gt;</code>. Den vises i browserens fane, når siden åbnes som en rigtig fil (ikke her i den lille forhåndsvisning)."]
+  },
+  {
+    part:"Del 7: Sæt det hele sammen", nav:"Skjul og vis", title:"Skjul og vis (perfekt til en quiz)",
+    body:`<p>Vil du lave et spørgsmål, hvor svaret er skjult, indtil man klikker? <code>&lt;details&gt;</code> laver en klap-ud-boks, og <code>&lt;summary&gt;</code> er det, man ser og kan klikke på. Helt uden kode-magi &ndash; ren HTML. Prøv at klikke på spørgsmålene til højre.</p>`,
+    tags:["&lt;details&gt;","&lt;summary&gt;"],
+    code:`<details>
+  <summary>Hvad er 7 × 8?</summary>
+  <p>Svar: 56</p>
+</details>
+
+<details>
+  <summary>Hvor mange sider har en sekskant?</summary>
+  <p>Svar: 6</p>
+</details>`,
+    challenge:["Lav dit eget matematik-spørgsmål med et skjult svar.","Ekstra: lav tre spørgsmål under hinanden."]
+  },
+  {
+    part:"Del 7: Sæt det hele sammen", nav:"Afsluttende projekt", title:"Byg din egen matematikside",
+    body:`<p>Du har lært utrolig meget: overskrifter, tekst, fremhævning, lister, ordlister, links, billeder, tabeller, SVG-tegninger, farver, klasser, sidens skelet og endda skjulte svar. Nu sætter du det hele sammen til din helt egen matematik-hjemmeside.</p>
+    <p>Herunder er en start, du kan bygge videre på. Der er ingen forkerte svar &ndash; gør den til din.</p>`,
+    tags:null,
+    code:`<!DOCTYPE html>
+<html>
+<head>
+  <title>Majas matematikside</title>
+  <style>
+    body { font-family: Arial; }
+    h1 { color: navy; }
+    .fakta { background: lightyellow; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Majas matematikside</h1>
+  <p class="fakta">Mit yndlingstal er 12.</p>
+
+  <h2>Gangetabellen for 12</h2>
+  <table border="1">
+    <tr><th>×</th><th>12</th></tr>
+    <tr><td>1</td><td>12</td></tr>
+    <tr><td>2</td><td>24</td></tr>
+  </table>
+
+  <h2>En tegning</h2>
+  <svg width="160" height="120">
+    <circle cx="50" cy="60" r="40" fill="crimson"/>
+    <rect x="100" y="30" width="50" height="60" fill="green"/>
+  </svg>
+
+  <h2>Quiz</h2>
+  <details>
+    <summary>Hvad er 12 × 3?</summary>
+    <p>36</p>
+  </details>
+</body>
+</html>`,
+    challenge:[
+      "Gør siden om, så den handler om DIG &ndash; dit navn og dit yndlingstal.",
+      "Brug mindst: én klasse, én tabel, én SVG-tegning og ét skjult quiz-svar.",
+      "Ekstra: tilføj en ordliste (<code>&lt;dl&gt;</code>) med tre matematik-ord.",
+      "Vis din færdige side til nogen, du kender!"
+    ]
+  }
+];
+
+/* ---------------- Byg siden ---------------- */
+const toc = document.getElementById("toc");
+const container = document.getElementById("lessons");
+let num = 0;
+let lastPart = null;
+let tocList = null;
+
+function backlink(){
+  const p = document.createElement("p");
+  p.innerHTML = '<a href="#indhold">Tilbage til indhold</a>';
+  return p;
+}
+
+lessons.forEach((l, i) => {
+  if(l.part !== lastPart){
+    if(lastPart !== null){ container.appendChild(backlink()); }
+    lastPart = l.part;
+    const ph = document.createElement("h2");
+    ph.innerHTML = l.part;
+    container.appendChild(ph);
+    const pt = document.createElement("p");
+    pt.innerHTML = "<b>" + l.part + "</b>";
+    toc.appendChild(pt);
+    tocList = document.createElement("ul");
+    toc.appendChild(tocList);
+  }
+  num++;
+
+  const li = document.createElement("li");
+  li.innerHTML = '<a href="#l' + i + '">' + num + ". " + l.nav + "</a>";
+  tocList.appendChild(li);
+
+  const tagsLine = l.tags && l.tags.length
+    ? `<p>Tags du lærer: ${l.tags.map(t=>`<code>${t}</code>`).join(", ")}</p>` : "";
+
+  const sec = document.createElement("div");
+  sec.innerHTML = `
+    <h3 id="l${i}">${num}. ${l.title}</h3>
+    ${l.body}
+    ${tagsLine}
+    <table class="play"><tr>
+      <td><textarea class="editor" spellcheck="false"></textarea></td>
+      <td><iframe class="preview" title="Forhåndsvisning" sandbox=""></iframe></td>
+    </tr></table>
+    <p><button type="button" class="reset">Nulstil</button></p>
+    <h4>Din tur</h4>
+    <ul>${l.challenge.map(c=>`<li>${c}</li>`).join("")}</ul>
+    <hr>
+  `;
+  container.appendChild(sec);
+
+  const editor = sec.querySelector(".editor");
+  const preview = sec.querySelector(".preview");
+  const reset = sec.querySelector(".reset");
+  editor.value = l.code;
+
+  function update(){
+    const v = editor.value;
+    const hasDoc = /<!doctype|<html/i.test(v);
+    preview.srcdoc = hasDoc ? v : '<!doctype html><meta charset="utf-8">' + v;
+  }
+  editor.addEventListener("input", update);
+  reset.addEventListener("click", () => { editor.value = l.code; update(); editor.focus(); });
+  update();
+});
+container.appendChild(backlink());
+</script>
+
+</body>
+</html>
